@@ -1,0 +1,46 @@
+Sample solution for Lab 2 Challenge Exercise:  order_drink function.
+
+function order_drink(agent) {
+
+
+       var drink = agent.parameters.drink_composite.drink;
+
+       var flavor = agent.parameters.drink_composite.flavor;
+
+
+       var number = agent.parameters.number;
+
+       const taskKey = datastore.key('order_item');
+
+
+       const entity = {
+         
+
+      key: taskKey,
+         
+
+        data: {
+         
+
+        item_name: 'drink',
+ 
+
+        drink: drink,
+
+
+         flavor: flavor,
+
+         number: number}
+        };
+
+       return datastore.save(entity).then(() => {
+
+                 console.log(`Saved ${entity.key.name}: ${entity.data.item_name}`);
+ 
+
+                agent.add(`Your order for ${number} ${flavor} ${drink}s has been placed!`);
+
+              });
+      
+
+}
